@@ -7,6 +7,7 @@ const HIDE_GET = "hidden"; //대문자로 사용하는것은 string일때 중요
 function onLoginSubmit(event) { //이곳에하는 일은 브라우저가 기본 동작을 실해하지 못하게 막아주는것뿐
     event.preventDefault(); //preventDefault함수는 이벤트에서 기본으로 하는것을 막아준다.
     const username = loginInput.value;
+    localStorage.setItem("username", username);
     loginForm.classList.add(HIDE_GET);
     greeting.innerText = `Hello ${username}`;
     greeting.classList.remove(HIDE_GET);
