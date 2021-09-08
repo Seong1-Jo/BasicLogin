@@ -4,16 +4,33 @@ const greeting = document.querySelector("#greeting");
 
 const HIDE_GET = "hidden"; //대문자로 사용하는것은 string일때 중요하지않은것으로 관습?!
 
+const LOCALNAME_KEY = "username";
+
 function onLoginSubmit(event) { //이곳에하는 일은 브라우저가 기본 동작을 실해하지 못하게 막아주는것뿐
     event.preventDefault(); //preventDefault함수는 이벤트에서 기본으로 하는것을 막아준다.
     const username = loginInput.value;
-    localStorage.setItem("username", username);
+    localStorage.setItem(LOCALNAME_KEY, username); //Small DB
     loginForm.classList.add(HIDE_GET);
-    greeting.innerText = `Hello ${username}`;
-    greeting.classList.remove(HIDE_GET);
+    // greeting.innerText = `Hello ${username}`;
+    // greeting.classList.remove(HIDE_GET);
+    paintGreetings(username);
 }
 
-loginForm.addEventListener("submit", onLoginSubmit); //submit은 엔터를 누르거나 클릭할때 발생!(click,enter기능을 둘다가짐)
+function paintGreetings(user) {
+    greeting.innerText = `Hello ${user}`;
+    greeting.classList.remove(HIDE_GET); //show the greeting
+} //위함수와 아래 if문에 겹치는 코드가 있어서 함수로 묶어준다.
 
 
-//함수를 함수(); 로 하면 함수한번만 실행하고 끝 그래서 이벤트리스너에서는 ()를 쓰지않고 실해하면, 한번만이아닌 하고싶을때 쓸수있다. addEventListener안에있는 함수는 직접실행하지않는다. 그말은 ()를 넣고 사용하지 않는다는말.
+const savedUser = localStorage.getItem(LOCALNAME_KEY);
+
+
+if(savedUser === null) {
+    loginForm.classList.remove(HIDE_GET);//show the form
+    loginForm.addEventListener("submit", onLoginSubmit); 
+}else {
+    paintGreetings(savedUser);
+    // greeting.innerText = `Hello ${savedUser}`;
+    // greeting.classList.remove(HIDE_GET); //show the greeting
+   
+}
