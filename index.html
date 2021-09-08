@@ -8,10 +8,15 @@
     <title>BasicLogin</title>
 </head>
 <body>
-    <div id="login-form">
-        <input type="text" placeholder="What is your name?" />
+    <form id="login-form"> <!--Html의 도움을 활용하려면 input을 form안에 위치시킴 이렇게되면 자동적으로 submit이된다= Enter든버튼이든 새로고침현상-->
+        <input
+        required  
+        maxlength="15"
+        type="text"
+        placeholder="What is your name?"
+        /> <!--<input> 태그의 required 속성은 폼 데이터(form data)가 서버로 제출되기 전 반드시 채워져 있어야 하는 입력 필드를 명시합니다.-->
         <button>Log In</button>    
-    </div>
+    </form>
     <script src="app.js"></script>
 </body>
 </html>
