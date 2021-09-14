@@ -1,8 +1,11 @@
 const clock = document.querySelector("h2#clock");
 
 function getClock() {
-    const date = new Date();  //new Date()는 현재 시간날짜 를 가져온다.
-    clock.innerText = `${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()}`;
+    const date = new Date();  //new Date()는 현재 시간날짜 를 가져온다.q
+    const hours = String(date.getHours()).padStart(2, "0"); //문자열로 바꾸어서 padStart함수를 이용하여, 2개문자를 만들고 앞에 0문자를 추가한다
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const second = String(date.getSeconds()).padStart(2, "0");
+    clock.innerText = `${hours} : ${minutes} : ${second}`;
 }
 
 getClock();
