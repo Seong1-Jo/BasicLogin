@@ -2,14 +2,25 @@ const todoForm = document.getElementById("todo-form");
 const toDoInput = todoForm.querySelector("input");//일반적으로 document.querySelector("#todo-form input")과 같다
 const toDoList = document.getElementById("todo-list");
 
+function deleteToDo(event) {
+    const li = event.target.parentElement; //event.target.parentElement은 버튼의 부모(li)를 li변수에 담는다.parentElement는 앞의 코드의 부모를 찾아주는거다.
+    li.remove();//삭제하는 코드함수
 
+    // console.log(event.target); //하면, 안에 내용들을 보여주는데, 그중에 path를 보면 버튼의 순서를 볼수있다, 그리고 target
+    // console.dir(event.target); //console.log 다음 해야할순서 , 많은 것중 parentNode,element를 찾자.=이유는 부모가누구인지 알수있다.
+    // console.dir(event.target.parentElement.innerText);//여기에서 누구누구인지 찾을수 있다. innerText를 해주자 중요!!
+}
 
 
 function paintToDo(newTodo) { //toDo를 그리는 역할 함수
-    const toLi = document.createElement("li");
+    const toLi = document.createElement("li"); //element생성
     const toSpan = document.createElement("span");
-    toLi.appendChild(toSpan); //li자식으로span
     toSpan.innerText = newTodo;
+    const toBtn = document.createElement("button"); 
+    toBtn.innerText = "X";
+    toBtn.addEventListener("click", deleteToDo); //이곳에 이벤트리스너를 입력 
+    toLi.appendChild(toSpan); //li자식으로span append는 맨마지막에 놓여져있어야한다,이순서 지키기 
+    toLi.appendChild(toBtn); //li > button
     toDoList.appendChild(toLi); //ul자식으로 li
     
 }
