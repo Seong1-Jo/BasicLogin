@@ -70,3 +70,26 @@ if(savedToDos !== null) { //7. 만약 savedToDos가 localStorage에 존재하면
     // parsedToDos.forEach((item) => {console.log("This is the turn of", item)}); //9.parsedToDos는 parse로인해 Array라서 forEach라는 것을 갖고있다. forEach는 Array의 각item(배열에담겨져있는값들)에 대해 function을 실해해준다.위의예를 보면이해도움(10번주석)
     // //예방법으로는 parsedToDos.forEach(sayHello);(이경우는 위의 주석함수이용) === parsedToDos.forEach((item) => {console.log("This is the turn of", item)});
 }
+
+
+
+
+
+//밑에는 filter를 설명하면서 예
+//     function sexyFilter(){ 
+        
+//     }
+
+//     [1, 2, 3, 4].filter(sexyFilter) //이렇게하면 1, 2, 3, 4를 각각 sexyFilter을 함수를 각각실행한다
+
+//     sexyFilter() //여기서 이역할을 뭘까? 이함수는 반드시 true를 리턴해야한다-> 만약 새 array에서 이 object를 유지하고 싶으면.
+
+// //filter함수를 쓸건데 filter함수는 우리가 지울 array를 지우는게아니라 새로운값으로 대체한다, 빈걸로 바꿀수 있다는거다
+// //filter함수는 forEach()함수와 비슷하다 예로) 
+
+//filter를 이용해 삭제하는 예!! 밑에 중요!!! 반드시 이해필요!!
+// const arr = [1234, 5324, 123, 123 , 44]
+
+// function filT(num) { return num < 1000} //return이 true가되는것들만 남아있고, false가 되는 것들은 삭제
+// arr.filter(filT)
+// (3) [123, 123, 44] 
