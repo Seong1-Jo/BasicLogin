@@ -22,8 +22,9 @@ function deleteToDo(event) {
 
 function paintToDo(newTodo) { //toDo를 그리는 역할 함수
     const toLi = document.createElement("li"); //element생성
+    toLi.id = newTodo.id; //20.id를 주는이유가 여기에 있다. web에 element에 ul il 을 확인
     const toSpan = document.createElement("span");
-    toSpan.innerText = newTodo;
+    toSpan.innerText = newTodo.text; //19.object(객체)를 받아오기때문에 인자.text를하면 받아온객체안에 text(프로퍼티)를 불어올수있다.
     const toBtn = document.createElement("button"); 
     toBtn.innerText = "X";
     toBtn.addEventListener("click", deleteToDo); //이곳에 이벤트리스너를 입력 
@@ -39,9 +40,15 @@ function handleToDoSubmit(event) { //text를 넣고 enter치면 일어나는 함
     event.preventDefault();
     const newToDo = toDoInput.value; //리셋되기전에 todoinput값을  변수 newToDo저장해둔다.
     toDoInput.value = ""; //submit인 enter을 치면 toDoInput.value값이 ""으로 바뀐다. 하지만 변수newToDo에는 값이 남아있다.
+    const newTodoObj = {//15.14내용다음인곳, 객체를 만들곳
+        text:newToDo, // text는 값들을 넣을것이고,
+        id: Date.now(), //id는랜덤으로 넣을것이다. //id를 왜넣을걸까?!이유는 id로 각각의 Li item을 구별하기위해,이것을이용해 게시판제목을id를줄수있다
+    } 
+        toDos.push(newTodoObj);//16.15번에 newTodoObj를 toDos(데이터베이스넣을곳) Array(배열)에 넣을예정
+    // toDos.push(newToDo); // 2.newToDo를 그리기 전에 푸시해서 배열에넣어준다,localStorage에는 배열을 담을수없다, 오직 텍스트만 담을수 있다.//14.데이터베이스에 To Do내용을 추가하는곳!(text를 object(객체)로 만들어서 push할예정)
 
-    toDos.push(newToDo); // 2.newToDo를 그리기 전에 푸시해서 배열에넣어준다,localStorage에는 배열을 담을수없다, 오직 텍스트만 담을수 있다.
-    paintToDo(newToDo);  //지금함수(handleToDoSubmit)가 paintToDo함수를 사용하는 코드
+        paintToDo(newTodoObj);//18.17번 object를 담는다.
+    // paintToDo(newToDo);  //지금함수(handleToDoSubmit)가 paintToDo함수를 사용하는 코드//17.화면에출력할 함수에text가아닌 object를 줄예정
     saveToDos(); //4.위에 그려주고 함수를 호출
 
 }
