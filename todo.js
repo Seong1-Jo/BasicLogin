@@ -13,6 +13,10 @@ function saveToDos() { //3. 함수를 만들어준다, 한가지 일만하는것
 function deleteToDo(event) {
     const li = event.target.parentElement; //event.target.parentElement은 버튼의 부모(li)를 li변수에 담는다.parentElement는 앞의 코드의 부모를 찾아주는거다.
     li.remove();//삭제하는 코드함수
+    toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id)); //삭제코드1: toDo는 argument(인자)이다. 선택한 li.id와 저장되어있는toDos의 배열마다의id(toDo.id)와 같지않읂것들만 출력, 즉 같은것들은 삭제한다는말 , toDos = toDos.filter(toDo => toDo.id !== li.id); 라면 삭제가 안되는게 보이는데 그것은 실제id는 숫자인데, 저기위해서 console.log로 li.id를 하면 string으로 되어있다. 그래서 숫자로 바꾸어서(parseInt())로해준다.
+    // console.log(li.id);//id를 표시하는 console
+    saveToDos();//삭제코드2: toDos DB에 ToDo(즉배열하나하나값)을 지운뒤 saveToDo를 불러와준다. 그래야 localstorge에 업데이트된다.그래야 새로고침하면, 삭제된값도 없어진다. 사용안하면, 새로고침하면 다시 지워진값이 돌아온다.!!!!!!!
+    
 
     // console.log(event.target); //하면, 안에 내용들을 보여주는데, 그중에 path를 보면 버튼의 순서를 볼수있다, 그리고 target
     // console.dir(event.target); //console.log 다음 해야할순서 , 많은 것중 parentNode,element를 찾자.=이유는 부모가누구인지 알수있다.
@@ -93,3 +97,16 @@ if(savedToDos !== null) { //7. 만약 savedToDos가 localStorage에 존재하면
 // function filT(num) { return num < 1000} //return이 true가되는것들만 남아있고, false가 되는 것들은 삭제
 // arr.filter(filT)
 // (3) [123, 123, 44] 
+
+////////////////////////////////////밑에는 마지막으로 삭제전예시,filter의 원리이해필요!!(web의 console창에 실행한결과)
+// const arr = [1, 2, 3, 4]
+
+// arr.filter(item => item > 2)
+// 결과 [3, 4]
+// const newArray = arr.filter(item => item > 2)
+// arr
+// 결과 [1, 2, 3, 4]
+// newArray
+// 결과 [3, 4]
+
+// 위의 결과를 보면 filter는 arr의 array를 변경하지않는다. 이말은 fiter함수는 기존의 array를 건드리는것이아니라 새array를 주어서 거기에서 작업한다.
