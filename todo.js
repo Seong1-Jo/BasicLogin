@@ -68,7 +68,7 @@ const savedToDos =  localStorage.getItem(TODOS_KEY);//6.앞에서greeting과 같
 
 if(savedToDos !== null) { //7. 만약 savedToDos가 localStorage에 존재하면 , savedToDos === savedToDos !== null
     const parsedToDos = JSON.parse(savedToDos); //8.localStorage에있는 string값을 살아있는 javascript object로 변하게하는거(궁금하면 console.log확인!)
-    toDos = parsedToDos //13.localstorage에 값을 유지하면서 새로운값을 추가하기위해,toDos(빈배열)에 parsedToDos(저장한값)을 넣어서 전에있던 값을 복원(const였다면 넣을수 없지만, let을 이용하므로서, 값을 바꿀수있기때문에)
+    toDos = parsedToDos; //13.localstorage에 값을 유지하면서 새로운값을 추가하기위해,toDos(빈배열)에 parsedToDos(저장한값)을 넣어서 전에있던 값을 복원(const였다면 넣을수 없지만, let을 이용하므로서, 값을 바꿀수있기때문에)
     parsedToDos.forEach(paintToDo); //11.이제 함수paintToDo를 이용하여 화면에지운값을 새로고침을해도 저장된값을 화면에 남아있게해주는거
 
     // parsedToDos.forEach((item) => {console.log("This is the turn of", item)}); //9.parsedToDos는 parse로인해 Array라서 forEach라는 것을 갖고있다. forEach는 Array의 각item(배열에담겨져있는값들)에 대해 function을 실해해준다.위의예를 보면이해도움(10번주석)
